@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#350912">
+<meta name="description" content="The Vanshe Experience — a luxury fashion house and secret adventure.">
+<title>VANSHE — The House of Her</title>
+<style>
+:root{
+  --wine:#350912;--wine2:#4c1022;--cherry:#76243a;--cherry2:#9a4054;
+  --gold:#dfc18a;--gold2:#f4dfb5;--cream:#fbf2e4;--muted:#d9c1bb;
+  --panel:#43101e;--line:#dfc18a55;--good:#c7e4bd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at 50% 0%,#672038 0%,var(--wine) 48%,#21060c 100%);color:var(--cream);font-family:Georgia,"Times New Roman",serif}
+button,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--gold2);outline-offset:3px}
+button:disabled{opacity:.55;cursor:not-allowed}
+a{color:var(--gold2)}
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 16px;background:#26070deF;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.brand{font-size:20px;letter-spacing:4px;color:var(--gold);white-space:nowrap}
+.topmeta{font-size:9px;letter-spacing:1.5px;text-align:right;color:var(--muted)}
+main{max-width:850px;margin:auto;padding:0 17px 60px}
+.hero{min-height:78vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:48px 6px;background:radial-gradient(ellipse at center,#a44c6226,transparent 67%)}
+.eyebrow{font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;line-height:1.7}
+h1{font-size:clamp(48px,13vw,90px);font-weight:normal;line-height:.91;letter-spacing:-2px;margin:24px 0}
+h1 em,h2 em{color:var(--gold);font-style:italic}
+.hero p,.intro{max-width:540px;color:var(--muted);line-height:1.8}
+.hero .date{font-size:10px;letter-spacing:2px;color:var(--gold);margin-top:24px}
+.btn{border:1px solid var(--gold);padding:13px 17px;letter-spacing:1.6px;font-size:10px;text-transform:uppercase;transition:transform .15s,background .2s}
+.btn:active,.tile:active{transform:scale(.98)}
+.btn-primary{background:var(--gold);color:var(--wine)}
+.btn-outline{background:transparent;color:var(--gold)}
+.btn-soft{background:#ffffff08;color:var(--cream);border-color:#dfc18a66}
+.button-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+section{padding:34px 0;border-top:1px solid #dfc18a35;scroll-margin-top:76px}
+h2{font-size:clamp(29px,7vw,42px);font-weight:normal;line-height:1.1;margin:9px 0 13px}
+h3{font-size:21px;font-weight:normal;margin:8px 0}
+p{line-height:1.75}
+.muted{color:var(--muted)}
+.gold{color:var(--gold)}
+.tiny{font-size:11px;line-height:1.65}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+.tile{min-width:0;text-align:left;padding:17px 14px;min-height:118px;color:var(--cream);background:linear-gradient(145deg,#76243a,#3c0c1a);border:1px solid #dfc18a66;border-radius:2px;transition:transform .15s}
+.tile .num{display:block;color:var(--gold);font-size:9px;letter-spacing:2px;margin-bottom:12px}
+.tile strong{font-size:17px;font-weight:normal;display:block}
+.tile small{display:block;color:var(--muted);font-size:11px;line-height:1.5;margin-top:8px}
+.panel{padding:18px;border:1px solid var(--line);background:linear-gradient(145deg,#4b1121dd,#26070ddd);margin-top:15px}
+label{display:block;color:var(--gold2);font-size:12px;margin:12px 0 6px}
+select,input[type=text]{width:100%;padding:12px;background:#26070c;color:var(--cream);border:1px solid #dfc18a88;border-radius:0}
+select option{background:#26070c}
+.result{min-height:48px;padding:12px;margin-top:12px;border-left:2px solid var(--gold);background:#ffffff08;color:var(--muted);font-size:13px;line-height:1.7}
+.pill{display:inline-block;border:1px solid #dfc18a77;padding:5px 8px;color:var(--gold);font-size:9px;letter-spacing:1px;margin:4px 4px 0 0}
+.progress-wrap{height:6px;background:#ffffff14;margin:12px 0;overflow:hidden}
+.progress{height:100%;width:0;background:var(--gold);transition:width .25s}
+.memory-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:16px}
+.memory-card{min-height:76px;border:1px solid var(--line);background:#641c30;color:var(--gold2);font-size:25px;display:flex;align-items:center;justify-content:center}
+.memory-card .face{display:none;font-size:11px;letter-spacing:.5px;text-align:center;padding:4px}
+.memory-card.flipped .back{display:none}
+.memory-card.flipped .face{display:block}
+.memory-card.matched{background:#2e3825;border-color:var(--good);color:var(--good)}
+.gift-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.gift{min-height:115px;background:linear-gradient(145deg,#7a2a40,#350912);border:1px solid var(--gold);color:var(--gold);font-size:28px}
+.gift span{display:block;font-size:10px;letter-spacing:1px;margin-top:10px;color:var(--cream)}
+.gift.opened{background:#2b2017;border-color:var(--good)}
+.reasons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:16px}
+.reason{aspect-ratio:1/1;min-height:70px;border:1px solid #dfc18a88;background:linear-gradient(145deg,#6e1d34,#300813);color:var(--gold);font-size:19px}
+.reason.opened{font-size:11px;line-height:1.4;padding:7px;color:var(--cream);background:#542034}
+.star-area{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:16px}
+.star{min-height:56px;background:#ffffff06;border:1px dashed #dfc18a88;color:var(--gold);font-size:24px}
+.star.found{background:#5a2031;border-style:solid;color:var(--gold2)}
+.keybox{text-align:center;padding:22px 12px;border:1px solid var(--gold);background:#21060c;margin-top:16px}
+.keys{font-size:27px;letter-spacing:6px;margin:14px 0}
+#finalReveal{display:none;text-align:center;padding:35px 12px;background:radial-gradient(ellipse,#7b2a4233,transparent 75%)}
+.letter{max-width:520px;margin:20px auto;color:var(--muted);line-height:2}
+footer{text-align:center;padding:34px 0 10px;color:var(--gold);font-size:9px;letter-spacing:2px}
+.notice{font-size:11px;color:var(--muted)}
+hr{border:0;border-top:1px solid #dfc18a33;margin:18px 0}
+@media(min-width:620px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.hero{min-height:75vh}.tile{min-height:135px}}
+@media(max-width:360px){main{padding-left:12px;padding-right:12px}.brand{font-size:17px;letter-spacing:3px}.memory-grid{gap:5px}.memory-card{min-height:65px}.gift-grid{gap:5px}.gift{font-size:23px}.reason{font-size:16px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">VANSHE</div>
+  <div class="topmeta">THE HOUSE OF HER<br><span class="gold">SPECIAL EDITION · 23</span></div>
+</header>
+<main>
+  <div class="hero" id="welcome">
+    <div class="eyebrow">A world created for one muse</div>
+    <h1>THE HOUSE<br>OF <em>HER.</em></h1>
+    <p>A little fashion. A little mystery. A whole little world inspired by you, Vanshika.</p>
+    <div class="button-row"><button class="btn btn-primary" id="enterBtn">Enter the house ↗</button></div>
+    <div class="date">24 NOVEMBER 2024 · ALWAYS IN OUR STORY</div>
+    <p class="tiny">A personal digital experience, made with care.</p>
+  </div>
+
+  <div id="house" hidden>
+    <section id="atelier">
+      <div class="eyebrow">Chapter I · The Atelier</div><h2>The art of being <em>you.</em></h2>
+      <p class="intro">Choose a room, create your signature look, and collect the little treasures hidden throughout the house.</p>
+      <div class="grid">
+        <button class="tile" data-collection="Cherry Icon"><span class="num">01 · STYLE</span><strong>Cherry Icon</strong><small>Confidence in cherry red.</small></button>
+        <button class="tile" data-collection="Beauty Edit"><span class="num">02 · BEAUTY</span><strong>Beauty Edit</strong><small>Little rituals, your way.</small></button>
+        <button class="tile" data-collection="Golden Details"><span class="num">03 · DETAILS</span><strong>Golden Details</strong><small>Small things, big personality.</small></button>
+        <button class="tile" data-collection="The Muse"><span class="num">04 · IDENTITY</span><strong>The Muse</strong><small>Original, always.</small></button>
+      </div>
+      <div class="result" id="collectionNote" aria-live="polite">Select a collection to reveal its little note.</div>
+    </section>
+
+    <section id="stylist">
+      <div class="eyebrow">Chapter II · Personal styling studio</div><h2>Style your <em>moment.</em></h2>
+      <p class="muted">Build a look from the wardrobe, then save its name on this device.</p>
+      <div class="panel">
+        <label for="outfit">Choose an outfit</label>
+        <select id="outfit"><option>Cherry satin dress</option><option>Black statement look</option><option>Soft ivory co-ord</option><option>After-hours velvet</option><option>Golden-hour casual</option></select>
+        <label for="colour">Colour story</label>
+        <select id="colour"><option>Cherry burgundy</option><option>Champagne gold</option><option>Midnight black</option><option>Pearl ivory</option><option>Rose blush</option></select>
+        <label for="accessory">Finishing detail</label>
+        <select id="accessory"><option>Gold hoops + gloss</option><option>Delicate pendant</option><option>Statement earrings</option><option>Soft perfume + bracelet</option><option>Tulip-inspired detail</option></select>
+        <label for="lookName">Name your look</label>
+        <input id="lookName" type="text" maxlength="36" placeholder="e.g. Cherry Moon">
+        <div class="button-row"><button class="btn btn-primary" id="saveLook">Save this look</button><button class="btn btn-outline" id="randomLook">Surprise me</button></div>
+        <div class="result" id="lookResult" aria-live="polite">Your moodboard will appear here.</div>
+        <div id="savedLooks" class="tiny muted"></div>
+      </div>
+    </section>
+
+    <section id="codeChallenge">
+      <div class="eyebrow">Chapter III · The secret mission</div><h2>Find the <em>three keys.</em></h2>
+      <p class="muted">Solve the riddles to collect three keys. Hint: the answers are words or dates connected to this experience.</p>
+      <div class="panel">
+        <div class="pill">RIDDLE 01</div><p>What date did the story begin as a relationship? Enter in DD NOV YYYY format.</p>
+        <label for="answer1">Your answer</label><input id="answer1" type="text" placeholder="e.g. 24 NOV 2024" autocomplete="off">
+        <button class="btn btn-outline" data-check="0">Unlock key one</button>
+        <hr>
+        <div class="pill">RIDDLE 02</div><p>Which rich red shade is the signature colour of this house?</p>
+        <label for="answer2">Your answer</label><input id="answer2" type="text" placeholder="Type the colour" autocomplete="off">
+        <button class="btn btn-outline" data-check="1">Unlock key two</button>
+        <hr>
+        <div class="pill">RIDDLE 03</div><p>Who is the muse this entire house celebrates?</p>
+        <label for="answer3">Your answer</label><input id="answer3" type="text" placeholder="Type the name" autocomplete="off">
+        <button class="btn btn-outline" data-check="2">Unlock key three</button>
+        <div class="keybox"><div class="eyebrow">Keys collected</div><div class="keys" id="keysDisplay" aria-live="polite">◇　◇　◇</div><div class="result" id="riddleResult" aria-live="polite">Every solved riddle opens another part of the story.</div></div>
+      </div>
+    </section>
+
+    <section id="memoryGame">
+      <div class="eyebrow">Chapter IV · Memory room</div><h2>A little game of <em>pairs.</em></h2>
+      <p class="muted">Tap two cards to find matching symbols. Match every pair to earn a star.</p>
+      <div class="button-row"><button class="btn btn-outline" id="restartMemory">Shuffle cards</button><span class="pill" id="memoryScore">Pairs: 0 / 6</span></div>
+      <div class="memory-grid" id="memoryGrid" aria-label="Memory matching game"></div>
+      <div class="result" id="memoryResult" aria-live="polite">Find all six matching pairs.</div>
+    </section>
+
+    <section id="giftVault">
+      <div class="eyebrow">Chapter V · The gift vault</div><h2>Choose a <em>little treasure.</em></h2>
+      <p class="muted">Open each sealed box for a message. Every box can be opened once; your discoveries are saved on this device.</p>
+      <div class="gift-grid" id="giftGrid">
+        <button class="gift" data-gift="0" aria-label="Open gift box one">♧<span>SEALED I</span></button>
+        <button class="gift" data-gift="1" aria-label="Open gift box two">◇<span>SEALED II</span></button>
+        <button class="gift" data-gift="2" aria-label="Open gift box three">✧<span>SEALED III</span></button>
+      </div>
+      <div class="result" id="giftResult" aria-live="polite">A small surprise is waiting inside each box.</div>
+    </section>
+
+    <section id="reasonsWall">
+      <div class="eyebrow">Chapter VI · The appreciation wall</div><h2>23 reasons to <em>celebrate you.</em></h2>
+      <p class="muted">Open each gold tile to reveal a little appreciation note. Collect all 23 to earn a bonus star.</p>
+      <div class="progress-wrap" role="progressbar" aria-label="Reasons discovered" aria-valuemin="0" aria-valuemax="23" aria-valuenow="0" id="reasonProgress"><div class="progress" id="reasonBar"></div></div>
+      <div class="tiny gold" id="reasonCount">0 of 23 discovered</div>
+      <div class="reasons" id="reasonsGrid"></div>
+      <div class="result" id="reasonResult" aria-live="polite">Tap a number to reveal a reason.</div>
+    </section>
+
+    <section id="starHunt">
+      <div class="eyebrow">Chapter VII · Hidden constellation</div><h2>Collect the <em>stars.</em></h2>
+      <p class="muted">Find all five hidden stars across the rooms. This constellation tracks your progress on this device.</p>
+      <div class="star-area" id="starArea"></div>
+      <div class="progress-wrap" role="progressbar" aria-label="Stars collected" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" id="starProgress"><div class="progress" id="starBar"></div></div>
+      <div class="result" id="starResult" aria-live="polite">0 of 5 stars found. Explore the house carefully.</div>
+    </section>
+
+    <section id="finalRoom">
+      <div class="eyebrow">The last door</div><h2>One last <em>reveal.</em></h2>
+      <p class="muted">The final room opens when you've found all three keys. Bonus discoveries make the journey even more special.</p>
+      <div class="keybox"><div class="keys">✧ ✧ ✧</div><button class="btn btn-primary" id="unlockFinal">Open the final room</button><div class="result" id="finalStatus" aria-live="polite">Collect all three keys in the Secret Mission first.</div></div>
+    </section>
+
+    <section id="finalReveal">
+      <div class="eyebrow">The final reveal · Special edition</div>
+      <h2>THE MUSE<br>WAS ALWAYS <em>YOU.</em></h2>
+      <p class="letter">Vanshika, this little world was made to celebrate your individuality, your creativity, and all the little things that make you uniquely you. Keep dreaming, creating, learning, and becoming whoever you want to be. You deserve a life that feels like your own masterpiece.</p>
+      <p class="gold">You were never just part of the story.<br>You were its inspiration.</p>
+      <button class="btn btn-outline" id="openLetter">Open your bonus letter ✉</button>
+      <div class="letter" id="bonusLetter" hidden>Thank you for being exactly who you are. May you always have the courage to follow your ideas, the freedom to define your own style, and a thousand reasons to feel proud of yourself. This house is a tiny reminder to celebrate the real you.</div>
+      <p class="gold">THE COLLECTION ENDS HERE.<br>THE STORY DOESN'T.</p>
+    </section>
+  </div>
+</main>
+<footer>THE VANSHE EXPERIENCE · MADE WITH CARE</footer>
+<script>
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const STORE = 'vansheExperience_v2';
+const defaults = {keys:[false,false,false],gifts:[],reasons:[],stars:[],savedLooks:[],memoryWon:false,finalSeen:false};
+let state;
+try { state = Object.assign({}, defaults, JSON.parse(localStorage.getItem(STORE)||'{}')); }
+catch(e){ state = Object.assign({},defaults); }
+state.keys = Array.isArray(state.keys) ? state.keys : [false,false,false];
+state.gifts = Array.isArray(state.gifts) ? state.gifts : [];
+state.reasons = Array.isArray(state.reasons) ? state.reasons : [];
+state.stars = Array.isArray(state.stars) ? state.stars : [];
+state.savedLooks = Array.isArray(state.savedLooks) ? state.savedLooks : [];
+function save(){ try{localStorage.setItem(STORE,JSON.stringify(state));}catch(e){} }
+function normalize(s){return String(s||'').trim().toLowerCase().replace(/[.,]/g,'').replace(/\s+/g,' ');}
+function setResult(id,msg){$(id).textContent=msg;}
+function scrollToEl(id){$(id).scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}
+$('enterBtn').addEventListener('click',()=>{$('house').hidden=false;save();scrollToEl('atelier');});
+document.querySelectorAll('[data-collection]').forEach(b=>b.addEventListener('click',()=>{
+ const notes={
+ 'Cherry Icon':'CHERRY RED · CONFIDENCE · YOUR OWN RULES. A signature look starts with feeling like yourself.',
+ 'Beauty Edit':'A LITTLE GLOW, A LITTLE MAGIC, ALL YOU. Beauty can be play, creativity, and self-expression.',
+ 'Golden Details':'THE LITTLE DETAILS MAKE THE WHOLE STORY. A tiny accessory can carry a whole mood.',
+ 'The Muse':'NOT A COPY OF ANYONE. THE ORIGINAL. Your individuality is the most interesting thing about you.'
+ };
+ setResult('collectionNote',notes[b.dataset.collection]||'A new chapter is waiting.');
+}));
+const looks = {
+outfit:$('outfit'),colour:$('colour'),accessory:$('accessory'),name:$('lookName')
+};
+function renderLooks(){
+ $('savedLooks').textContent=state.savedLooks.length?'Saved looks: '+state.savedLooks.map(x=>x.name+' — '+x.outfit).join(' · '):'No saved looks yet.';
+}
+function showLook(){
+ const name=looks.name.value.trim()||'Untitled Muse Look';
+ setResult('lookResult',name+' — '+looks.outfit.value+' / '+looks.colour.value+' / '+looks.accessory.value+'. Your style, your rules.');
+ return {name,outfit:looks.outfit.value,colour:looks.colour.value,accessory:looks.accessory.value};
+}
+$('saveLook').addEventListener('click',()=>{
+ const item=showLook();state.savedLooks.unshift(item);state.savedLooks=state.savedLooks.slice(0,8);save();renderLooks();
+ setResult('lookResult','Saved “'+item.name+'” on this device. '+item.outfit+' · '+item.colour+' · '+item.accessory+'.');
+});
+$('randomLook').addEventListener('click',()=>{
+ [looks.outfit,looks.colour,looks.accessory].forEach(s=>s.selectedIndex=Math.floor(Math.random()*s.options.length));
+ showLook();
+});
+const answers=[
+ {id:'answer1',accepted:['24 nov 2024','24 november 2024','24/11/2024'],success:'KEY ONE FOUND: 24 November 2024 — the relationship chapter began.'},
+ {id:'answer2',accepted:['cherry','cherry burgundy','burgundy','cherry red'],success:'KEY TWO FOUND: Cherry burgundy — the signature shade of this house.'},
+ {id:'answer3',accepted:['vanshika','vanshi','vanshu'],success:'KEY THREE FOUND: Vanshika — the muse behind this experience.'}
+];
+function renderKeys(){
+ $('keysDisplay').textContent=state.keys.map(v=>v?'🔑':'◇').join('　');
+ document.querySelectorAll('[data-check]').forEach(b=>{const i=Number(b.dataset.check);b.textContent=state.keys[i]?'Key '+(i+1)+' collected ✓':'Unlock key '+(i+1);});
+}
+document.querySelectorAll('[data-check]').forEach(b=>b.addEventListener('click',()=>{
+ const i=Number(b.dataset.check),a=answers[i];
+ if(state.keys[i]){setResult('riddleResult','You already collected this key. Keep going!');return;}
+ if(a.accepted.includes(normalize($(a.id).value))){
+   state.keys[i]=true;save();renderKeys();setResult('riddleResult',a.success);
+   if(state.keys.every(Boolean))setResult('finalStatus','All three keys collected! The final room is ready.');
+ }else setResult('riddleResult','Not quite… try again. Read the clue carefully and check the spelling.');
+}));
+renderKeys();
+
+const symbols=['✿','◇','☾','♛','❀','✧'];
+let deck=[],flipped=[],matched=new Set(),lockBoard=false,moves=0;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startMemory(){
+ deck=shuffle([...symbols,...symbols]);flipped=[];matched=new Set();lockBoard=false;moves=0;
+ $('memoryGrid').innerHTML='';symbols.forEach((_,i)=>{});
+ deck.forEach((sym,i)=>{
+  const b=document.createElement('button');b.className='memory-card';b.type='button';b.setAttribute('aria-label','Hidden memory card '+(i+1));b.innerHTML='<span class="back" aria-hidden="true">✦</span><span class="face"></span>';
+  b.querySelector('.face').textContent=sym;b.dataset.symbol=sym;b.dataset.index=String(i);b.addEventListener('click',()=>flipCard(b));$('memoryGrid').appendChild(b);
+ });
+ setResult('memoryResult','Find all six matching pairs.');$('memoryScore').textContent='Pairs: 0 / 6';
+}
+function flipCard(b){
+ const i=Number(b.dataset.index);
+ if(lockBoard||matched.has(i)||flipped.includes(i))return;
+ b.classList.add('flipped');b.setAttribute('aria-label','Card showing '+b.dataset.symbol);flipped.push(i);
+ if(flipped.length===2){
+  moves++;const [a,c]=flipped.map(n=>deck[n]);
+  if(a===c){
+   flipped.forEach(n=>{matched.add(n);const el=$('memoryGrid').children[n];el.classList.add('matched');el.setAttribute('aria-label','Matched card '+deck[n]);});
+   flipped=[];$('memoryScore').textContent='Pairs: '+matched.size/2+' / 6';
+   if(matched.size===12){state.memoryWon=true;addStar('memory');save();setResult('memoryResult','Every pair matched! A constellation star has been awarded.');}
+   else setResult('memoryResult','A match! Keep finding pairs.');
+  }else{
+   lockBoard=true;setResult('memoryResult','Not a pair this time. Try another combination.');
+   window.setTimeout(()=>{flipped.forEach(n=>{const el=$('memoryGrid').children[n];if(el){el.classList.remove('flipped');el.setAttribute('aria-label','Hidden memory card '+(n+1));}});flipped=[];lockBoard=false;},750);
+  }
+ }
+}
+$('restartMemory').addEventListener('click',startMemory);startMemory();
+
+const giftMessages=[
+'GIFT I · A reminder: your ideas deserve room to grow. Keep creating things that feel like you.',
+'GIFT II · A little wish: may you find beautiful places, brave opportunities, and people who celebrate your individuality.',
+'GIFT III · A secret note: your story is still being written. The best chapters can be the ones you create for yourself.'
+];
+function renderGifts(){
+ document.querySelectorAll('[data-gift]').forEach(b=>{
+  const i=Number(b.dataset.gift),opened=state.gifts.includes(i);
+  b.classList.toggle('opened',opened);b.innerHTML=opened?'✧<span>OPENED ✓</span>':['♧','◇','✧'][i]+'<span>SEALED '+['I','II','III'][i]+'</span>';
+ });
+}
+document.querySelectorAll('[data-gift]').forEach(b=>b.addEventListener('click',()=>{
+ const i=Number(b.dataset.gift);
+ if(!state.gifts.includes(i)){state.gifts.push(i);save();addStar('gift'+i);renderGifts();}
+ setResult('giftResult',giftMessages[i]);
+}));
+renderGifts();
+
+const reasons=[
+'Your creativity deserves to be celebrated.','You have your own way of seeing the world.','Your ideas can become something wonderful.',
+'You are allowed to grow at your own pace.','Your individuality is worth protecting.','You bring your own colour to every room.',
+'Your curiosity can take you far.','Your style can be entirely your own.','You deserve kindness, including from yourself.',
+'Your dreams are worth taking seriously.','You can learn something new every day.','Your imagination is a strength.',
+'You do not need to be like anyone else.','Your small wins count, too.','Your voice and ideas matter.',
+'You can change your mind and keep growing.','Your effort matters even before results arrive.','You deserve space to create.',
+'Your future has room for surprises.','You can be soft and strong in your own way.','Your happiness matters.',
+'Your story belongs to you.','And the world is better with your original spark.'
+];
+function renderReasons(){
+ $('reasonsGrid').innerHTML='';
+ reasons.forEach((txt,i)=>{
+  const b=document.createElement('button');const opened=state.reasons.includes(i);b.className='reason'+(opened?' opened':'');b.type='button';b.textContent=opened?txt:String(i+1).padStart(2,'0');b.setAttribute('aria-label',opened?'Reason '+(i+1)+': '+txt:'Reveal reason '+(i+1));b.addEventListener('click',()=>{
+   if(!state.reasons.includes(i)){state.reasons.push(i);save();if(state.reasons.length===23)addStar('reasons');}
+   renderReasons();setResult('reasonResult',(i+1)+'. '+txt);updateProgress();
+  });$('reasonsGrid').appendChild(b);
+ });
+ $('reasonCount').textContent=state.reasons.length+' of 23 discovered';
+ $('reasonBar').style.width=(state.reasons.length/23*100)+'%';$('reasonProgress').setAttribute('aria-valuenow',String(state.reasons.length));
+}
+function addStar(id){
+ if(!state.stars.includes(id)){state.stars.push(id);save();renderStars();}
+}
+const starNames=['Atelier star','Memory star','Gift star I','Gift star II','Gift star III','Appreciation star'];
+function renderStars(){
+ const ids=['atelier','memory','gift0','gift1','gift2','reasons'];
+ $('starArea').innerHTML='';
+ ids.slice(0,5).forEach((id,i)=>{
+  const found=state.stars.includes(id);const b=document.createElement('button');b.type='button';b.className='star'+(found?' found':'');b.textContent=found?'✦':'☆';b.setAttribute('aria-label',found?starNames[i]+' collected':'Collect hidden star '+(i+1));
+  b.addEventListener('click',()=>{
+   if(!state.stars.includes(id)){state.stars.push(id);save();renderStars();setResult('starResult','You found '+starNames[i]+'. Keep exploring for the rest.');}
+   else setResult('starResult',starNames[i]+' already collected.');
+  });
+  $('starArea').appendChild(b);
+ });
+ const count=state.stars.filter(id=>ids.slice(0,5).includes(id)).length;
+ $('starBar').style.width=(count/5*100)+'%';$('starProgress').setAttribute('aria-valuenow',String(count));
+ setResult('starResult',count===5?'All five stars collected! The constellation is complete.':count+' of 5 stars found. Tap the star tiles to collect them.');
+}
+function updateProgress(){renderReasons();renderStars();}
+renderReasons();renderStars();renderLooks();
+
+$('unlockFinal').addEventListener('click',()=>{
+ if(state.keys.every(Boolean)){
+  $('finalReveal').style.display='block';state.finalSeen=true;save();setResult('finalStatus','The final room is open. Enjoy your reveal.');scrollToEl('finalReveal');
+ }else{
+  const n=state.keys.filter(Boolean).length;setResult('finalStatus','The final door is still locked. You have '+n+' of 3 keys. Return to the Secret Mission and solve the remaining riddles.');scrollToEl('codeChallenge');
+ }
+});
+$('openLetter').addEventListener('click',()=>{$('bonusLetter').hidden=!$('bonusLetter').hidden;$('openLetter').textContent=$('bonusLetter').hidden?'Open your bonus letter ✉':'Close your bonus letter';});
+if(state.finalSeen&&state.keys.every(Boolean))$('finalReveal').style.display='block';
+})();
+</script>
+</body>
+</html>
